@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js 示例</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 首先加载 Three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <!-- 然后是你的自定义脚本 -->
+    <script>
+        // 等待 DOM 加载完成  
+        document.addEventListener('DOMContentLoaded', function () {
+            // 初始化场景  
+            var scene = new THREE.Scene(); // 注意这里是大写的 Scene  
+
+            // 创建相机  
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // 创建渲染器并添加到 DOM  
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // 创建一个立方体几何体  
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
+
+            // 创建一个基本材质  
+            var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+            // 创建一个立方体网格  
+            var cube = new THREE.Mesh(geometry, material);
+
+            // 将立方体添加到场景中  
+            scene.add(cube);
+
+            // 渲染循环  
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // 更新立方体的旋转  
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+
+                // 渲染场景和相机  
+                renderer.render(scene, camera);
+            }
+
+            // 开始渲染循环  
+            animate();
+
+            // 窗口大小变化时的处理  
+            window.addEventListener('resize', function () {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, false);
+        });  
+    </script>
+</body>
+
+</html>
