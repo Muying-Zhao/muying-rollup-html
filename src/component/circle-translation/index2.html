@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Particle Animation Demo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        const particleCount = 200; // 粒子数量  
+        const particles = [];
+
+        // 初始化粒子  
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1, // 粒子大小范围：1-3  
+                speedX: (Math.random() - 0.5) * 2, // 水平速度  
+                speedY: (Math.random() - 0.5) * 2, // 垂直速度  
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // 清除画布  
+
+            // 更新并绘制粒子  
+            particles.forEach((particle) => {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                // 如果粒子超出边界，则反弹或重新生成（这里简单处理为重新生成）  
+                if (particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height) {
+                    particle.x = Math.random() * canvas.width;
+                    particle.y = Math.random() * canvas.height;
+                    particle.speedX = (Math.random() - 0.5) * 2;
+                    particle.speedY = (Math.random() - 0.5) * 2;
+                }
+
+                // 绘制粒子  
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${Math.random() * 360}, 100%, 50%, 0.5)`; // 随机颜色  
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animate); // 请求下一帧动画  
+        }
+
+        animate(); // 开始动画  
+
+        // 监听窗口大小变化并更新canvas大小  
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>
