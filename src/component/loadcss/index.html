@@ -1,0 +1,44 @@
+<!-- 可以实现换皮肤功能 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Load CSS Demo</title>
+  <!-- 初始样式 -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #content {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <h1>Hello, World!</h1>
+    <p>This is a simple example of dynamic CSS loading.</p>
+    <button id="loadCSSButton">Load Additional Styles</button>
+  </div>
+
+  <!-- 引入JavaScript -->
+  <script src="./loadCSS.js"></script>
+  <script>
+    // 获取按钮元素
+    const button = document.getElementById('loadCSSButton');
+
+    // 当按钮被点击时加载额外的CSS样式
+    button.addEventListener('click', () => {
+      loadCSS('./additional-styles.css');
+    });
+  </script>
+</body>
+
+</html>

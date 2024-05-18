@@ -1,0 +1,17 @@
+body {
+  background-color: #f0f8ff;
+  /* AliceBlue */
+}
+
+#content {
+  border-color: #333;
+  color: #333;
+}
+
+h1 {
+  color: #00509e;
+}
+
+p {
+  font-size: 1.2em;
+}
