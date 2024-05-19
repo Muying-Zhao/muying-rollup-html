@@ -1,0 +1,73 @@
+<!-- 击鼓传花 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>前端击鼓传花</title>
+  <style>
+    #participants {
+      list-style: none;
+      padding: 0;
+    }
+
+    .selected {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>前端击鼓传花</h1>
+  <ul id="participants">
+  </ul>
+  <button onclick="startGame()">开始游戏</button>
+  <button onclick="stopGame()">停止游戏</button>
+
+  <script>
+    let participants = ['玩家1', '玩家2', '玩家3', '玩家4', '玩家5']; // 参与者列表  
+    let currentIndex = 0; // 当前“花”的持有者索引  
+    let intervalId = null; // 计时器ID  
+
+    // 渲染参与者列表  
+    function renderParticipants() {
+      const participantsList = document.getElementById('participants');
+      participantsList.innerHTML = ''; // 清空列表  
+      participants.forEach((participant, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = participant;
+        if (index === currentIndex) {
+          listItem.classList.add('selected'); // 标记当前持有者  
+        }
+        participantsList.appendChild(listItem);
+      });
+    }
+
+    // 开始游戏  
+    function startGame() {
+      if (intervalId) return; // 如果已经开始，则不重复开始  
+      renderParticipants(); // 初始渲染参与者列表  
+      intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % participants.length; // 更新当前持有者  
+        renderParticipants(); // 重新渲染列表以显示新的持有者  
+      }, 500); // 每500毫秒更新一次  
+    }
+
+    // 停止游戏并显示最终持有者  
+    function stopGame() {
+      clearInterval(intervalId); // 停止计时器  
+      intervalId = null;
+      alert(`最终“花”的持有者是：${participants[currentIndex]}`);
+      renderParticipants(); // 重新渲染列表以显示最终状态  
+    }
+
+    // 页面加载时初始化  
+    window.onload = function () {
+      renderParticipants(); // 初始渲染参与者列表（虽然此时没有选中状态）  
+    };
+  </script>
+</body>
+
+</html>

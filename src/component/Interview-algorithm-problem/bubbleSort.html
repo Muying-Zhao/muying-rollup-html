@@ -1,0 +1,42 @@
+<!-- 
+  冒泡排序（Bubble Sort）是一种简单的排序算法，它重复地遍历要排序的数列，
+  一次比较两个元素，如果他们的顺序错误就把他们交换过来。遍历数列的工作是
+  重复地进行直到没有再需要交换，也就是说该数列已经排序完成。
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function bubbleSort(arr) {
+      let len = arr.length;
+      for (let i = 0; i < len - 1; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) { // 相邻元素两两对比  
+            // 交换位置  
+            let temp = arr[j + 1];
+            arr[j + 1] = arr[j];
+            arr[j] = temp;
+          }
+        }
+      }
+      return arr;
+    }
+
+    // 使用示例  
+    let array = [64, 34, 25, 12, 22, 11, 90];
+    console.log('原始数组：', array);
+    bubbleSort(array);
+    console.log('排序后的数组：', array);
+  </script>
+</body>
+
+</html>

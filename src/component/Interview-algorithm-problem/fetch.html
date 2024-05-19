@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 假设我们有一个API端点，它返回一个JSON响应  
+    const apiUrl = 'https://api.example.com/data';
+
+    // 使用Fetch API发送GET请求  
+    fetch(apiUrl)
+      .then(response => {
+        // 这里的response对象包含了服务器返回的响应  
+
+        // 首先检查响应的状态码是否表示成功（通常在200-299范围内）  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // 如果响应成功，我们可以解析响应体（通常是JSON）  
+        return response.json(); // 将响应体解析为JSON  
+      })
+      .then(data => {
+        // 在这里，data是服务器返回的JSON数据  
+        console.log(data);
+        // 在这里可以对数据进行处理或使用  
+      })
+      .catch(error => {
+        // 在这里处理错误，可能是网络错误或服务器返回的错误状态码  
+        console.error('Fetch error:', error);
+      });
+  </script>
+
+  <!-- 
+    确保你的请求遵循了CORS（跨源资源共享）策略，否则你可能会遇到跨域请求被阻止的问题。
+    fetch 默认不会发送或接收任何cookies，除非你明确指定了凭据（credentials）。如果你需要发送cookies，你可以设置 credentials: 'include' 选项。
+  对于错误处理，确保你总是在链的末尾添加一个 .catch() 块来处理任何可能发生的错误。
+  -->
+
+  <!-- 处理图片 -->
+
+  <!-- <script>
+    fetch('https://example.com/path/to/image.jpg')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob(); // 将响应体读取为Blob对象  
+      })
+      .then(blob => {
+        // 创建一个ObjectURL表示这个Blob对象  
+        const objectURL = URL.createObjectURL(blob);
+        // 假设你有一个img元素  
+        const img = document.querySelector('img');
+        img.src = objectURL; // 将img的src设置为ObjectURL  
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  </script> -->
+
+  <!-- 处理接口,处理JSON  -->
+  <!-- 
+  <script>
+    fetch('https://api.example.com/users') // 假设这是一个返回用户列表的API
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch users');
+        }
+        return response.json(); // 将响应体解析为JSON
+      })
+      .then(users => {
+        console.log(users); // 打印用户列表
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  </script> -->
+</body>
+
+</html>

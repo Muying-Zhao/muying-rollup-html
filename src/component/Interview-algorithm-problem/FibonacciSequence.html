@@ -1,0 +1,71 @@
+<!-- 青蛙跳台阶 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>斐波那契数列</title>
+</head>
+
+<body>
+
+  <button onclick="displayFibonacci(10)">显示斐波那契数列前10项</button>
+
+  <script>
+    function generateFibonacciSequence(n) {
+      if (n <= 0) {
+        return "斐波那契数列的项数必须为正整数";
+      }
+      let sequence = [1]; // 初始化数组，包含第一个数  
+      if (n > 1) {
+        sequence.push(1); // 添加第二个数  
+      }
+      for (let i = 2; i < n; i++) {
+        sequence.push(sequence[i - 1] + sequence[i - 2]); // 追加下一个斐波那契数  
+      }
+      return sequence;
+    }
+
+    function displayFibonacci(n) {
+      let sequence = generateFibonacciSequence(n);
+      if (typeof sequence === 'string') {
+        alert(sequence);
+      } else {
+        let output = '';
+        for (let i = 0; i < sequence.length; i++) {
+          output += sequence[i] + ' ';
+        }
+        alert(output.trim()); // 使用alert显示结果，或者你可以将结果输出到HTML元素中  
+      }
+    }  
+  </script>
+
+</body>
+
+</html>
+
+
+
+<!-- 计算斐波那契数列中的第n个数字 -->
+
+<!-- 
+  function fibonacci(n) {  
+  if (n <= 0) {  
+    return "斐波那契数列的项数必须为正整数";  
+  } else if (n === 1 || n === 2) {  
+    return 1;  
+  } else {  
+    let a = 1, b = 1, temp;  
+    for (let i = 3; i <= n; i++) {  
+      temp = a + b;  
+      a = b;  
+      b = temp;  
+    }  
+    return b;  
+  }  
+}  
+  
+// 示例：计算斐波那契数列的第10个数字  
+console.log(fibonacci(10)); // 输出：55
+ -->

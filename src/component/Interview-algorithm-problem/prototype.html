@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 实现 call
+    call 方法允许一个函数使用特定的 this 值和单独给出的一个或
+    多个参数来调用。 
+-->
+  <script>
+    Function.prototype.myCall = function (context, ...args) {
+      if (typeof this !== 'function') {
+        throw new Error('myCall must be called on a function');
+      }
+
+      context = context || window; // 如果context为null或undefined，则默认为window  
+
+      context.fn = this; // 将函数作为context的一个方法  
+      const result = context.fn(...args); // 调用函数  
+      delete context.fn; // 清理环境  
+
+      return result;
+    };
+  </script>
+
+  <!-- 实现 apply
+apply 方法调用一个具有给定 this 值的函数，以及以一个数组（或类似数组对象）
+的形式提供的参数。
+ -->
+  <script>
+    Function.prototype.myApply = function (context, argsArray) {
+      if (typeof this !== 'function') {
+        throw new Error('myApply must be called on a function');
+      }
+
+      context = context || window; // 如果context为null或undefined，则默认为window  
+
+      context.fn = this; // 将函数作为context的一个方法  
+      let result;
+      // 判断argsArray是否为数组，如果不是，则转为数组  
+      if (Array.isArray(argsArray)) {
+        result = context.fn(...argsArray);
+      } else {
+        result = context.fn();
+      }
+      delete context.fn; // 清理环境  
+
+      return result;
+    };
+  </script>
+
+  <!-- 实现 bind
+bind 方法创建一个新的函数，当被调用时，它的 this 关键字将设置为
+提供的值，在调用新函数时，将给定参数列表作为原函数的参数序列的前
+缀。然后返回新函数。
+ -->
+  <script>
+    Function.prototype.myBind = function (context, ...args1) {
+      if (typeof this !== 'function') {
+        throw new Error('myBind must be called on a function');
+      }
+
+      return function (...args2) {
+        return this.myCall(context, ...args1, ...args2);
+      }.bind(this); // 注意这里我们使用了bind来确保内部函数的this指向是正确的  
+    };
+  </script>
+
+  <!-- 
+实现 new
+new 操作符用于创建一个用户定义的对象类型的实例或具有构造函数的
+内置对象的实例。
+   -->
+  <script>
+    function myNew(constructor, ...args) {
+      if (typeof constructor !== 'function') {
+        throw new Error('myNew requires a constructor function');
+      }
+
+      // 创建一个空对象，继承自构造函数的原型  
+      let obj = Object.create(constructor.prototype);
+
+      // 将构造函数的this绑定到新创建的对象，并执行构造函数  
+      let result = constructor.apply(obj, args);
+
+      // 如果构造函数返回了一个对象，则返回该对象；否则返回新创建的对象  
+      return result instanceof Object ? result : obj;
+    }
+  </script>
+</body>
+
+</html>

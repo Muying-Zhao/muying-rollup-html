@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 创建一个函数，用于创建闭包
+    function createCounter() {
+      // 私有变量，只能在createCounter函数内部访问
+      let count = 0;
+
+      // 返回一个对象，该对象包含访问器函数
+      return {
+        // 增加计数器
+        increment: function () {
+          count++;
+        },
+        // 获取计数器的值
+        getCount: function () {
+          return count;
+        }
+      };
+    }
+
+    // 使用createCounter函数创建一个计数器对象
+    const counter = createCounter();
+
+    // 调用访问器函数，增加计数器的值
+    counter.increment();
+    counter.increment();
+
+    // 调用访问器函数，获取计数器的值
+    console.log(counter.getCount()); // 输出: 2
+
+    // 尝试直接访问私有变量count（这是不可能的）
+    // console.log(counter.count); // 会抛出错误，因为count是私有的
+
+    // 创建另一个计数器对象
+    const anotherCounter = createCounter();
+
+    // 这两个计数器对象是独立的，因为它们各自有自己的词法环境
+    console.log(anotherCounter.getCount()); // 输出: 0
+  </script>
+</body>
+
+</html>

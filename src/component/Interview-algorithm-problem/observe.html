@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Subject {
+      constructor() {
+        this.observers = [];
+      }
+
+      registerObserver(observer) {
+        this.observers.push(observer);
+      }
+
+      removeObserver(observer) {
+        this.observers = this.observers.filter(obs => obs !== observer);
+      }
+
+      notifyObservers(data) {
+        this.observers.forEach(observer => {
+          observer.update(data);
+        });
+      }
+    }
+
+    class Observer {
+      update(data) {
+        console.log(`Observer received data: ${data}`);
+      }
+    }
+
+    // 使用示例  
+    const subject = new Subject();
+    const observer1 = new Observer();
+    const observer2 = new Observer();
+
+    subject.registerObserver(observer1);
+    subject.registerObserver(observer2);
+
+    subject.notifyObservers('Hello, observers!'); // 控制台将打印两次消息  
+
+    subject.removeObserver(observer1);
+    subject.notifyObservers('Hello again, remaining observers!'); // 控制台将只打印一次消息
+
+  </script>
+</body>
+
+</html>

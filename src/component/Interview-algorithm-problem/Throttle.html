@@ -1,0 +1,45 @@
+<!-- 防抖 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="myButton">点击我</button>
+
+  <script>
+    function throttle(func, delay) {
+      let lastCall = 0;
+      return function (...args) {
+        const now = new Date().getTime();
+        if (now - lastCall < delay) {
+          return;
+        }
+        lastCall = now;
+        return func.apply(this, args);
+      };
+    }
+
+    // 获取按钮元素  
+    const button = document.getElementById('myButton');
+
+    // 原始的点击事件处理器  
+    function handleButtonClick() {
+      console.log('Button clicked!');
+      // 这里可以添加你想要的逻辑  
+    }
+
+    // 使用节流函数包装原始事件处理器  
+    const throttledButtonClick = throttle(handleButtonClick, 1000); // 每200毫秒最多执行一次  
+
+    // 为按钮添加事件监听器，并使用节流后的函数  
+    button.addEventListener('click', throttledButtonClick);
+  </script>
+</body>
+
+</html>
