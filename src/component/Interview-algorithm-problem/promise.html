@@ -38,6 +38,22 @@
         console.error('出错了:', error);
       });
   </script>
+
+
+  <script>
+    console.log('script start'); // 打印 "script start"
+    setTimeout(function () { console.log('setTimeout'); }, 0); // 设置一个延迟为0的定时器，但不会立即执行
+    // 注：setTimeout的回调函数会在当前代码块执行完毕后执行
+
+    new Promise((resolve) => { // 创建一个Promise对象
+      console.log('promise'); // 打印 "promise"
+      resolve(); // 解决Promise
+    })
+      .then(function () { console.log('promise1'); }) // 在Promise解决后执行，打印 "promise1"
+      .then(function () { console.log('promise2'); }); // 在上一个.then()后执行，打印 "promise2"
+
+    console.log('script end'); // 打印 "script end"
+  </script>
 </body>
 
 </html>

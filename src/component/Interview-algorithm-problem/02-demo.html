@@ -1,0 +1,181 @@
+<!-- 买卖股票的最佳时机 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    输入: [7,1,5,3,6,4]
+  输出: 5
+  解释: 在第 2 天（股票价格 = 1）买入，在第 5 天（股票价格 = 6）卖出，最大利润 = 6-1 = 5 。
+  注意利润不能是 7-1 = 6, 因为卖出时间必须大于买入时间。
+   -->
+  <script>
+    let arr = [7, 1, 5, 3, 6, 4]
+    let newarr = []
+
+    function answer(arr) {
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i; j < arr.length - 1; j++) {
+          newarr.push(arr[j + 1] - arr[i])
+        }
+      }
+      let maxCount = newarr[0]
+      for (let k = 0; k < newarr.length; k++) {
+        if (newarr[k] > maxCount) {
+          maxCount = newarr[k]
+        }
+      }
+      return { newarr, maxCount }
+    }
+    console.log(answer(arr).maxCount)
+  </script>
+  <!-- 标准答案，进行遍历依次找出最小值和利润最大的，然后比较利润最大的 -->
+  <script>
+    function maxProfit(prices) {
+      let minPrice = Infinity;// 为正无穷大
+      let maxProfit = 0;
+      for (let price of prices) {
+        if (price < minPrice) {
+          minPrice = price;
+        } else if (price - minPrice > maxProfit) {
+          maxProfit = price - minPrice;
+        }
+      }
+
+      return maxProfit;
+    }
+
+    // 测试用例
+    console.log(maxProfit([7, 1, 5, 3, 6, 4])); // 输出：5
+    console.log(maxProfit([7, 6, 4, 3, 1])); // 输出：0
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- 买卖股票的最佳时机 -->
+  <!-- 可以尽可能地完成更多的交易（多次买卖一支股票）。但是，你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 -->
+  <!-- 
+  输入: [7,1,5,3,6,4]
+输出: 7
+解释: 在第 2 天（股票价格 = 1）买入，在第 3 天（股票价格 = 5）卖出，利润为 5-1 = 4。
+     接着，在第 4 天（股票价格 = 3）买入，在第 5 天（股票价格 = 6）卖出，利润为 6-3 = 3。
+  -->
+  <!-- 这道题目是贪心算法的经典应用，只需要在价格上涨时买入并在价格下降时卖出。 -->
+  <script>
+    function maxProfit(prices) {
+      let maxProfit = 0;
+      for (let i = 1; i < prices.length; i++) {
+        if (prices[i] > prices[i - 1]) {
+          maxProfit += prices[i] - prices[i - 1];
+        }
+      }
+      return maxProfit;
+    }
+
+    // 测试用例
+    console.log(maxProfit([7, 1, 5, 3, 6, 4])); // 输出：7
+    console.log(maxProfit([1, 2, 3, 4, 5])); // 输出：4
+    console.log(maxProfit([7, 6, 4, 3, 1])); // 输出：0
+  </script>
+
+  <!-- 买卖股票的最佳时机 III -->
+  <!-- 
+    题目描述：
+最多可以完成两笔交易。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+   -->
+  <!-- Infinity 是一个特殊的数值，表示正无穷大，是number类型 -->
+
+  <script>
+    function maxProfit(prices) {
+      let buy1 = -Infinity, sell1 = 0;
+      let buy2 = -Infinity, sell2 = 0;
+      // let buy3 = -Infinity, sell3 = 0;
+
+      for (let price of prices) {
+        buy1 = Math.max(buy1, -price); // 第一次买入的最大利润
+        sell1 = Math.max(sell1, buy1 + price); // 第一次卖出的最大利润
+        buy2 = Math.max(buy2, sell1 - price); // 第二次买入的最大利润
+        sell2 = Math.max(sell2, buy2 + price); // 第二次卖出的最大利润
+        // buy3 = Math.max(buy3, sell2 - price);
+        // sell3 = Math.max(sell3, buy3 + price);
+      }
+
+      return sell2;
+    }
+
+    // 测试用例
+    console.log(maxProfit([3, 3, 5, 0, 0, 3, 1, 4])); // 输出：6
+    console.log(maxProfit([1, 2, 3, 4, 5])); // 输出：4
+    console.log(maxProfit([7, 6, 4, 3, 1])); // 输出：0
+  </script>
+
+
+  <!-- 变种问题3：买卖股票的最佳时机 IV -->
+  <!-- 
+  题目描述：
+给定一个整数 k，你可以完成最多 k 笔交易。你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+ -->
+  <!-- 当 k 大于等于 prices 数组的一半时，这个问题就等同于可以进行无限次交易的情况（类似于变种问题2）。否则，使用动态规划求解。
+   -->
+  <script>
+    function maxProfit(k, prices) {
+      if (k >= prices.length / 2) {
+        let maxProfit = 0;
+        for (let i = 1; i < prices.length; i++) {
+          if (prices[i] > prices[i - 1]) {
+            maxProfit += prices[i] - prices[i - 1];
+          }
+        }
+        return maxProfit;
+      }
+      // 这行代码的目的是创建一个二维数组 dp，其中 dp[t][d] 表示在第 d 天结束时最多进行 t 次交易所能获得的最大利润。
+      // 可以从类数组对象（如对象和可迭代对象）创建一个新的数组实例。
+
+      let dp = Array.from({ length: k + 1 }, () => Array(prices.length).fill(0));
+      // Array.from({ length: k + 1 }, () => Array(prices.length).fill(0)) 会创建一个长度为 k + 1 的数组，其中每个元素是一个长度为 prices.length 的数组，并且所有这些数组都被 0 填充。
+      // 假设 k = 2 和 prices = [1, 2, 3, 4]，则 dp 将被初始化为：
+      /* 
+      let dp = [
+  [0, 0, 0, 0], // 0 次交易
+  [0, 0, 0, 0], // 1 次交易
+  [0, 0, 0, 0]  // 2 次交易
+];
+      */
+
+      for (let t = 1; t <= k; t++) {
+        let maxDiff = -prices[0];
+        for (let d = 1; d < prices.length; d++) {
+          dp[t][d] = Math.max(dp[t][d - 1], prices[d] + maxDiff);
+          maxDiff = Math.max(maxDiff, dp[t - 1][d] - prices[d]);
+        }
+      }
+
+      return dp[k][prices.length - 1];
+    }
+
+    // 测试用例
+    console.log(maxProfit(2, [3, 2, 6, 5, 0, 3])); // 输出：7
+    console.log(maxProfit(2, [2, 4, 1])); // 输出：2
+    console.log(maxProfit(3, [1, 2, 4, 2, 5, 7, 2, 4, 9, 0])); // 输出：15
+
+  </script>
+</body>
+
+</html>

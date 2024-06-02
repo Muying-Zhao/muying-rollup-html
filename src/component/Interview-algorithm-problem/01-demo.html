@@ -1,0 +1,115 @@
+<!-- 各位相加 -->
+<!-- 
+  输入: 38
+输出: 2
+解释: 各位相加的过程如下：
+38 -> 3 + 8 = 11
+11 -> 1 + 1 = 2
+由于 2 是一位数，所以返回 2。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let num = 38
+    let sum
+    function answer(n) {
+      let k = n % 10
+      let j = Math.floor(n / 10)
+      sum = j + k
+      if (sum < 10) {
+        return sum
+      } else {
+        return answer(sum)
+      }
+    }
+    console.log(answer(num))
+  </script>
+
+  <!-- 处理负数：扩展题目使其处理负数。 -->
+
+  <script>
+    function addDigits(n) {
+      // 将输入的数字 n 转化为其绝对值。
+      n = Math.abs(n);
+      let sum = 0;
+
+      while (n > 0) {
+        sum += n % 10;
+        n = Math.floor(n / 10);
+      }
+
+      if (sum < 10) {
+        return sum;
+      } else {
+        return addDigits(sum);
+      }
+    }
+
+    // 测试用例
+    console.log(addDigits(38)); // 输出：2
+    console.log(addDigits(-38)); // 输出：2
+    console.log(addDigits(1234)); // 输出：1
+
+  </script>
+
+  <!-- 自定义基数（例如：二进制） -->
+  <script>
+    function addDigitsInBase(n, base) {
+      let sum = 0;
+
+      while (n > 0) {
+        sum += n % base;
+        n = Math.floor(n / base);
+      }
+
+      if (sum < base) {
+        return sum;
+      } else {
+        return addDigitsInBase(sum, base);
+      }
+    }
+
+    // 测试用例
+    console.log(addDigitsInBase(38, 10)); // 输出：2 (十进制)
+    console.log(addDigitsInBase(38, 2)); // 输出：1 (二进制)
+    console.log(addDigitsInBase(38, 8)); // 输出：3 (八进制)
+
+  </script>
+
+  <!-- 字符串处理 -->
+  <script>
+
+    function addDigitsFromString(str) {
+      let sum = 0;
+
+      for (let char of str) {
+        if (!isNaN(char)) {
+          sum += parseInt(char, 10);
+        }
+      }
+
+      if (sum < 10) {
+        return sum;
+      } else {
+        return addDigitsFromString(sum.toString());
+      }
+    }
+
+    // 测试用例
+    console.log(addDigitsFromString("38")); // 输出：2
+    console.log(addDigitsFromString("1234")); // 输出：1
+    console.log(addDigitsFromString("abc123")); // 输出：6 (非数字字符被忽略)
+
+  </script>
+</body>
+
+</html>

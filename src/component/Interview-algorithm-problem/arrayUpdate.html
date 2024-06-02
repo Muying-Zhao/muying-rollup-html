@@ -1,0 +1,65 @@
+<!-- 数组排序 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = ["B3", "D2", "F1", "A9", "D12", "A2", "C1", "Z0", "B1"]
+    let temp = ''
+    function func(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+          if (Number(arr[j].slice(1)) > Number(arr[j + 1].slice(1))) {
+            temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = temp
+          }
+          if (Number(arr[j].slice(1)) == Number(arr[j + 1].slice(1))) {
+            if (arr[j].charCodeAt(0) > arr[j + 1].charCodeAt(0)) {
+              temp = arr[j]
+              arr[j] = arr[j + 1]
+              arr[j + 1] = temp
+            }
+          }
+        }
+      }
+      return arr
+    }
+    console.log(func(arr))
+
+
+    // ASCII码的输入A获取和反查
+    let charA = 'A';
+    let asciiValueOfA = charA.charCodeAt(0); // 返回65  
+    console.log(asciiValueOfA);
+    let asciiValue = 65; // 字符'A'的ASCII值  
+    let charFromAscii = String.fromCharCode(asciiValue); // 返回'A'  
+    console.log(charFromAscii);
+
+
+
+    /* slice() 是一个数组方法，用于从数组中提取一个子数组，并返
+    回这个子数组。它不会改变原始数组。
+    slice()接受两个参数，如果省略该参数，第一个表示从该索引（包括）开始提取
+    第二个表示（可选）：在该索引处停止提取（不包括）
+    如果省略两个参数则全部提取内容，
+    如果只省略第二个参数，slice() 会一直提取到数组末尾。如果为负值，则表示倒数。
+    */
+    /* splice() 是一个数组方法，用于添加 / 删除数组中的元素，
+    并返回被删除的元素（如果没有删除任何元素，则返回空数组）。它会改变原始数组。 */
+    let fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+    let removed = fruits.splice(2, 2, 'Kiwi', 'Pineapple');
+    console.log(fruits, removed)
+// fruits 现在是 ['Banana', 'Orange', 'Kiwi', 'Pineapple', 'Mango']
+// removed 现在是 ['Lemon', 'Apple']
+  </script>
+</body>
+
+</html>

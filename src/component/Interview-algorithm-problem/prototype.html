@@ -1,3 +1,4 @@
+<!-- 原型链考查 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,6 +93,29 @@ new 操作符用于创建一个用户定义的对象类型的实例或具有构�
       // 如果构造函数返回了一个对象，则返回该对象；否则返回新创建的对象  
       return result instanceof Object ? result : obj;
     }
+  </script>
+
+  <script>
+    // 定义构造函数 Foo  
+    function Foo() {
+      this.a = function () {
+        console.log(2);
+      };
+    }
+
+    // 这是 Foo 的原型方法，所有的 Foo 实例都会继承它（除非实例上有同名方法）  
+    Foo.prototype.a = function () {
+      console.log(3);
+    };
+    Foo.a = function () {
+      console.log(4);
+    };
+    Foo.a(); // 输出: 4  
+    let obj = new Foo();
+    // 注意：尽管 Foo.prototype 上有一个 a 方法，但 obj.a 引用的是实例上定义的 a 方法  
+    obj.a(); // 输出: 2  
+    Foo.a(); // 输出: 4
+    // console.log(parseInt('110', 2))// 110=1*2*2+1*2+0=6
   </script>
 </body>
 

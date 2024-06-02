@@ -47,6 +47,24 @@
     // 这两个计数器对象是独立的，因为它们各自有自己的词法环境
     console.log(anotherCounter.getCount()); // 输出: 0
   </script>
+
+  <script type="text/javascript">
+    function fn() {
+      let count = 0
+      return {
+        ins: function () {
+          return count++;
+        },
+        minue: function () {
+          return count--;
+        }
+      }
+    }
+    const x = fn()
+
+    console.log(x.ins())
+
+  </script>
 </body>
 
 </html>

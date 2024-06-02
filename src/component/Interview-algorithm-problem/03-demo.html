@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 将其转化为从索引（最小为1），然后去重颠倒数组
+    // let arr = [85, 45, 62, 30, 55, 85, 30];
+    // 输出: [3, 1, 4, 2, 5]
+    function transformAndReverseArray(arr) {
+      // 去除重复项并排序
+      let sortedUniqueArray = [...new Set(arr)].sort((a, b) => a - b);
+      // 将原数组转化为索引数组（即排名）
+      let indexArray = arr.map(num => sortedUniqueArray.indexOf(num) + 1);
+      // 去重保留第一个出现的索引
+      let seen = new Set();
+      let uniqueIndexArray = indexArray.filter(num => {
+        if (seen.has(num)) {
+          return false;
+        } else {
+          seen.add(num);
+          return true;
+        }
+      });
+      // 颠倒索引数组的顺序
+      let reversedIndexArray = uniqueIndexArray.reverse();
+      return reversedIndexArray;
+    }
+    // 示例数组
+    let arr = [85, 45, 62, 30, 55, 85, 30];
+    let result = transformAndReverseArray(arr);
+    console.log(result); // 输出: [3, 1, 4, 2, 5]
+  </script>
+</body>
+
+</html>
