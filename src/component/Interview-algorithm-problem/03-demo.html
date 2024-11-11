@@ -14,10 +14,14 @@
     // let arr = [85, 45, 62, 30, 55, 85, 30];
     // 输出: [3, 1, 4, 2, 5]
     function transformAndReverseArray(arr) {
+      const x = [...new Set(arr)].sort((a, b) => a - b);
+      console.log(x, 'x')
       // 去除重复项并排序
       let sortedUniqueArray = [...new Set(arr)].sort((a, b) => a - b);
+      console.log(sortedUniqueArray, 'sortedUniqueArray')
       // 将原数组转化为索引数组（即排名）
       let indexArray = arr.map(num => sortedUniqueArray.indexOf(num) + 1);
+      console.log([...new Set(indexArray)], 'indexArray')
       // 去重保留第一个出现的索引
       let seen = new Set();
       let uniqueIndexArray = indexArray.filter(num => {

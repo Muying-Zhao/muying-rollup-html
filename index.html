@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC端首页</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .top-nav {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-area,
+    .right-area {
+      padding: 10px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+    }
+
+    .left-area {
+      flex: 1;
+      margin-right: 10px;
+      border-radius: 10px;
+      /* 可以根据需求设置倒角 */
+    }
+
+    .right-area {
+      flex: 0 0 200px;
+      border-radius: 10px;
+      /* 可以根据需求设置倒角 */
+    }
+
+    .module {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .module h3 {
+      margin-top: 0;
+    }
+
+    .module-content {
+      display: none;
+    }
+
+    .module.active .module-content {
+      display: block;
+    }
+
+    .module .toggle-btn {
+      cursor: pointer;
+      text-decoration: underline;
+      color: blue;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <h1>PC端首页</h1>
+    </div>
+    <div class="content">
+      <div class="left-area">
+        <div class="module">
+          <h3>模块一</h3>
+          <div class="module-content">
+            提醒内容或详细信息...
+          </div>
+          <div class="toggle-btn">展开/收起</div>
+        </div>
+        <div class="module">
+          <h3>模块二</h3>
+          <div class="module-content">
+            提醒内容或详细信息...
+          </div>
+          <div class="toggle-btn">展开/收起</div>
+        </div>
+        <!-- 更多模块根据需求添加 -->
+      </div>
+      <div class="right-area">
+        <div class="module">
+          <h3>功能窗口一</h3>
+          <div class="module-content">
+            快捷功能操作...
+          </div>
+        </div>
+        <div class="module">
+          <h3>功能窗口二</h3>
+          <div class="module-content">
+            快捷功能操作...
+          </div>
+        </div>
+        <!-- 更多快捷窗口根据需求添加 -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleBtns = document.querySelectorAll('.toggle-btn');
+      toggleBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const module = this.closest('.module');
+          module.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

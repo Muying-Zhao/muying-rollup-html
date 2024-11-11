@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 去重方法一
+    var arr = [1, 3, 5, 6, 7, 9, 3, 5, 1]
+    const newNums1 = arr.filter((n, i) => {
+      // arr.indexOf(n)
+      // 元素遍历查找只会查到第一个出现的元素
+      return arr.indexOf(n) === i
+    })
+    console.log(newNums1, 'newNums1')
+
+    // 去重方法二
+    const newNums2 = Array.from(new Set(arr))
+    console.log(newNums2, 'newNums2')
+
+    // 不能去重 forEach 方法对数组的每个元素执行一次提供的函数，但它不返回新的数组，而是返回 undefined。
+    const newNums3 = arr.forEach((n, i) => {
+      return arr.indexOf(n) === i
+    })
+    console.log(newNums3, 'newNums3')
+
+    // 去重方法四,将数组元素组合为一个单一值。
+    // 累加器,当前值,当前索引，源数组
+    // acc为累加器，它累积回调的返回值，是上一次调用回调时返回的累积值。
+    const newNums4 = arr.reduce((acc, n, i) => {
+      return [].concat(acc, arr.indexOf(n) === i ? n : [])
+    }, [])
+    console.log(newNums4, 'newNums4')
+  </script>
+  <script>
+    // 去掉相同字符串
+    let scanf = "momo"
+    function func(str) {
+      let newStr = [...new Set(str)]
+      let strs = ''
+      newStr.map(n => strs += n)
+      return strs
+
+    }
+    console.log(func(scanf))
+
+  </script>
+</body>
+
+</html>

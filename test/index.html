@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Chart with Flexbox</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      /* 条形之间的距离 */
+      width: 80%;
+      height: 400px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .bar {
+      flex: 1;
+      max-width: 60px;
+      /* 条形的最大宽度 */
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar-chart">
+    <div class="bar" style="height: 30%; background-color: #f00;"></div>
+    <div class="bar" style="height: 80%; background-color: #ddd;"></div>
+    <div class="bar" style="height: 70%; background-color: #0fd;"></div>
+    <div class="bar" style="height: 60%; background-color: #ff0;"></div>
+    <div class="bar" style="height: 90%; background-color: #234;"></div>
+  </div>
+</body>
+
+</html>

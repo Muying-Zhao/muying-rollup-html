@@ -110,6 +110,25 @@
     console.log(addDigitsFromString("abc123")); // 输出：6 (非数字字符被忽略)
 
   </script>
+  <script>
+    let arr = [1, 3, 5, 6, 7, 9, 10, 14, 13, 11, 10, 6, 4, 1];
+    let newArr = []
+    newArr = [...new Set(arr)]
+    newArr.sort((a, b) => a - b);
+    console.log(newArr, 'newArr')
+  </script>
+  <script>
+    const numbers = [1, 3, 5, 7, 9, 11];
+    const max = Math.max.call(null, ...numbers);
+
+    console.log(max); // 11
+  </script>
+  <script>
+    const numb = [1, 3, 5, 7, 9, 11];
+    const maxnew = Math.max.call(null, numb);
+
+    console.log(maxnew); // 11
+  </script>
 </body>
 
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    常见题目描述
+    给定二叉树的前序遍历序列和中序遍历序列，构造该二叉树并返回其根节点。
+    
+    示例：
+    
+    前序遍历序列：[3, 9, 20, 15, 7]
+    中序遍历序列：[9, 3, 15, 20, 7]
+    返回构造的二叉树的根节点。
+   -->
+  <script>
+    function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+    }
+
+    function buildTree(preorder, inorder) {
+      if (!preorder.length || !inorder.length) {
+        return null;
+      }
+
+      // 根节点的值是前序遍历的第一个元素
+      const rootVal = preorder[0];
+      const root = new TreeNode(rootVal);
+
+      // 在中序遍历中找到根节点的索引
+      const rootIndex = inorder.indexOf(rootVal);
+
+      // 根据根节点索引划分左子树和右子树的前序和中序遍历
+      const leftInorder = inorder.slice(0, rootIndex);
+      const rightInorder = inorder.slice(rootIndex + 1);
+
+      const leftPreorder = preorder.slice(1, 1 + leftInorder.length);
+      const rightPreorder = preorder.slice(1 + leftInorder.length);
+
+      // 递归构建左子树和右子树
+      root.left = buildTree(leftPreorder, leftInorder);
+      root.right = buildTree(rightPreorder, rightInorder);
+
+      return root;
+    }
+
+    // Example usage:
+    const preorder = [3, 9, 20, 15, 7];
+    const inorder = [9, 3, 15, 20, 7];
+
+    const tree = buildTree(preorder, inorder);
+    console.log(tree);
+  </script>
+</body>
+
+</html>

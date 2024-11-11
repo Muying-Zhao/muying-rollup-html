@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 最大公约数 -->
+  <!-- 方法一 -->
+  <script>
+    function gcd(a, b) {
+      // write code here
+      let temp = null
+      let maxNum = 1
+      let arr = []
+      if (a > b) {
+        temp = b
+      } else {
+        temp = a
+      }
+      for (let i = 1; i <= temp; i++) {
+        if (a % i == 0 && b % i == 0) {
+          arr.push(i)
+        }
+      }
+      // console.log(arr, 'arr')
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[j] > maxNum) { maxNum = arr[j] }
+      }
+      return maxNum;
+    }
+    console.log(gcd(48, 18)); // 输出: 6
+    console.log(gcd(101, 103)); // 输出: 1
+    console.log(gcd(56, 98)); // 输出: 14
+  </script>
+  <script>
+    function gcc(a, b) {
+      while (b !== 0) {  // 30 / 35
+        let temp = b;  //  35   30  6
+        b = a % b;  //  30  5  6  5
+        a = temp; //35  30  30  30
+      }
+      return a;
+    }
+    console.log(gcc(48, 18)); // 输出: 6
+    console.log(gcc(101, 103)); // 输出: 1
+    console.log(gcc(56, 98)); // 输出: 14
+  </script>
+</body>
+
+</html>
